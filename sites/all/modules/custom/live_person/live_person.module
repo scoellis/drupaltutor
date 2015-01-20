@@ -1,0 +1,42 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function live_person_block_info() {
+    $blocks['my_custom_block'] = array(
+        'info' => t('Custom Block Name'),
+    );
+
+    return $blocks;
+}
+
+/**
+ * Implementation of hook_block_view().
+ */
+function live_person_block_view($delta='') {
+  $block = array();
+  switch ($delta) {
+    case 'my_custom_block':
+      $block['subject'] = t('Custom Block Name');
+      $block['content'] = live_person_block_contents();
+      break;
+  }
+  return $block;
+}
+
+/**
+ * custom html block
+ * @return string
+ */
+function live_person_block_contents() {
+  return '
+<!-- BEGIN LivePerson Button Code -->
+<div id="lpButDivID-1378786438"></div>
+<script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/62053948/?cmd=mTagRepstate&site=62053948&buttonID=14&divID=lpButDivID-1378786438&bt=1&c=1"></script>
+<!-- END LivePerson Button code -->
+  ';
+}

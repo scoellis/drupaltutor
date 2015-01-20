@@ -1,0 +1,4 @@
+name = "Custom Live Person Module"
+description = "Custom Live Person Module In Code"
+core = "7.x"
+package = "Custom Live Person Modules"
