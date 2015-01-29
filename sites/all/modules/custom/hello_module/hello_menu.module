@@ -5,6 +5,7 @@ function hello_menu_menu() {
   
   $items['hello'] = array(
     'title' => 'Hello World',
+    'description' => 'This is a description',
     'page callback' => 'hello_menu_simple_hello',
     'access arguments' => array('access content'),
     'menu_name' => 'main-menu',
