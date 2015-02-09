@@ -1,0 +1,6 @@
+<?php
+
+function node_limit_menu_alter(&$items) {
+    $test = 1;
+    $items['node/%node/edit']['title'] = 'Update';
+}
