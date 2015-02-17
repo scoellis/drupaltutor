@@ -1,0 +1,73 @@
+<?php
+
+function hello_menu_menu() {
+  $items = array();
+  
+  $items['hello'] = array(
+    'title' => 'Hello World',
+    'description' => 'This is a description',
+    'page callback' => 'hello_menu_simple_hello',
+    'access arguments' => array('access content'),
+    'menu_name' => 'main-menu',
+    'weight' => 1,
+  );
+  
+  $items['hello/simple'] = array(
+    'title' => 'simple',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1
+  );
+  
+  $items['hello/variables'] = array (
+    'title' => 'Hello Variables',
+    'page callback' => 'hello_menu_list_variables',
+    'access arguments' => array('access content'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  $items['hello/variables/%'] = array(
+    'title callback' => 'hello_menu_show_variable_title',
+    'title arguments' => array(2),
+    'page callback' => 'hello_menu_show_variable',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'menu_name' => 'navigation',
+  );
+  
+  $items['hello/variables/create'] = array(
+    'title' => 'Create Variable',
+    'page callback' => 'hello_menu_create_variable',
+    'access arguments' => array('access content'),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  
+  return $items;
+}
+
+function hello_menu_create_variable() {
+  return t('This is where we create variables.');
+}
+
+function hello_menu_show_variable_title ($variable_name) {
+  return t('Show Variable: @name', array('@name' => $variable_name));
+}
+
+function hello_menu_show_variable($variable_name) {
+  $value = variable_get($variable_name, t('No value for the variable'));
+  return $value;
+}
+
+function hello_menu_list_variables() {
+    $variables = variable_initialize();
+    $names = array_keys($variables);
+    $output = '<ul>';
+    foreach ($names as $name) {
+      $output .= '<li>' . l($name, 'hello/variables/' . $name, array('attributes' => array('class' => array('test-link', 'other-link')))) . '</li>';
+    }
+    $output .= '</ul>';
+    return $output;
+}
+
+function hello_menu_simple_hello() {
+    return t('Hello world!!');
+}
