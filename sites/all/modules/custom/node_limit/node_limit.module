@@ -1,5 +1,4 @@
 <?php
 function node_limit_menu_alter(&$items) {
-  echo"<pre>";
-  print_r($items);
+  $test = 1;
 }
